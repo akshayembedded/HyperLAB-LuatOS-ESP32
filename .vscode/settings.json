@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "luat_fs.h": "c",
+        "luat_base.h": "c"
+    }
+}
