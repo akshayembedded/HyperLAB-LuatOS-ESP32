@@ -1,0 +1,45 @@
+{
+    "name": "HyperLAB-LuatOS-ESP32",
+    "version": "0.1.0",
+    "description": "LuatOS ported to ESP32 on PLATFORMIO",
+    "keywords": "lua, esp32, esp32s3, scripting, interpreter, luatos",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/akshayembedded/HyperLAB-LuatOS-ESP32.git"
+    },
+    "authors": [
+      {
+        "name": "Akshay P Kumar",
+        "email": "embeddedekerala@gmail.com",
+        "maintainer": true
+      },
+      {
+        "name": "Chahil Patel",
+        "email": "chahil@hyperlab.life",
+        "maintainer": true
+      }
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/akshayembedded/HyperLAB-LuatOS-ESP32",
+    "frameworks": ["arduino"],
+    "platforms": ["espressif32"],
+    "build": {
+      "includeDir": "include",
+      "srcDir": "src",
+      "libArchive": true,
+      "flags": [
+      "-DLUA_USE_ESP32S3",
+      "-DUART_SCLK_DEFAULT=9600",
+      "-DESP_LWIP_DHCP_FINE_TIMERS_ONDEMAND0",     
+      "-DLUA_USE_ESP32S3"
+      ]
+    },
+    "examples": [
+    {
+      "name": "Basic Lua",
+      "base": "examples/BasicLua",
+      "files": ["platformio.ini", "src/main.cpp","partitions.16m.csv"]
+    }
+    ]
+
+  }

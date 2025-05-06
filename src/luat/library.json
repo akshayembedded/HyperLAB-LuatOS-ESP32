@@ -1,0 +1,15 @@
+{
+    "name": "luat",
+    "version": "1.0.0",
+    "description": "Lua implementation for embedded systems",
+    "build": {
+      "srcDir": ".",
+      "srcFilter": [
+        "+<cmsis_os2/*.c>",
+        "+<freertos/*.c>",
+        "+<modules/*.c>",
+        "+<vfs/*.c>",
+        "+<weak/*.c>"
+      ]
+    }
+}

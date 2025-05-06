@@ -1,0 +1,5 @@
+{
+    "name": "wlan",
+    "version": "1.0.0",
+    "description": "Simple wlan implementation"
+  }

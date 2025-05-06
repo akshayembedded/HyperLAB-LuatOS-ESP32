@@ -1,0 +1,5 @@
+{
+    "name": "i2c_tools",
+    "version": "1.0.0",
+    "description": "i2c_tools stack with multiple components",
+}

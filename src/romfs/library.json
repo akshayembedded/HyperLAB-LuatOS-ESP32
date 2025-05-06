@@ -1,0 +1,5 @@
+{
+    "name": "romfs",
+    "version": "1.0.0",
+    "description": "romfs stack with multiple components",
+}
