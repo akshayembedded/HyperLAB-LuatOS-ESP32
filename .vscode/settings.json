@@ -1,6 +1,15 @@
 {
     "files.associations": {
         "luat_fs.h": "c",
-        "luat_base.h": "c"
+        "luat_base.h": "c",
+        "luat_log.h": "c",
+        "luat_msgbus.h": "c",
+        "luat_mem.h": "c",
+        "luat_timer.h": "c",
+        "stdio.h": "c",
+        "luat_libs.h": "c",
+        "initializer_list": "cpp",
+        "xstring": "cpp",
+        "xutility": "cpp"
     }
 }

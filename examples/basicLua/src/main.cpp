@@ -1,55 +1,26 @@
 #include <Arduino.h>
 #include <bootloader_random.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/timers.h"
-#include "esp_timer.h" 
+
+#include "luatosWrapper.h"
 
 extern "C"
 {
-#include "luat_base.h"
-#include "luat_timer.h"
-#include "luat_uart.h"
-#include "luat_malloc.h"
 
-#include <string.h>
-#include <stdlib.h>
-#include "esp_event.h"
-#include "esp_system.h"
-#include "nvs_flash.h"
-#include "esp_log.h"
-#include "esp_task_wdt.h"
 
-#include "luat_rtos.h"
 
-#include <time.h>
-#include <sys/time.h>
 extern lua_State *L;
 #define LUAT_LOG_TAG "main"
 #include "luat_log.h"
 
 }
-#define MAX_BUFFER_SIZE 81920
+#define MAX_BUFFER_SIZE 8192
 char luaCodeBuffer[MAX_BUFFER_SIZE];
 int bufferPos = 0;
 bool isReceiving = false;
 #define CTRL_D 4
-void lua_start()
-{
-    luat_timer_stop_all();
-    luat_main();
-}
-bool lua_exec_string(lua_State* L, const char* lua_code, std::string& error_msg) {
-    // Execute the Lua code
-    int result = luaL_dostring(L, lua_code);
-    if (result != LUA_OK) {
-        // Get error message from the top of the stack
-        error_msg = lua_tostring(L, -1);
-        lua_pop(L, 1); // Remove error message from stack
-        return false;
-    }
-    
-    return true;
-}
+luatosWrapper a;
+
+
 
 void processChar(char c) {
     std::string error = "";
@@ -66,7 +37,7 @@ void processChar(char c) {
         
         // Execute the Lua code
         Serial.println("Executing code...");
-        int result = lua_exec_string(L, luaCodeBuffer,error);
+        int result = a.luatosWrapper_exec_string(L, luaCodeBuffer,error);
         // Execute the partial code
         LLOGI("%s",error.c_str());
         
@@ -109,7 +80,7 @@ void processChar(char c) {
           return;  // Already handled
         }
         luaCodeBuffer[bufferPos] = '\0';
-        lua_exec_string(L, luaCodeBuffer,error);
+        a.luatosWrapper_exec_string(L, luaCodeBuffer,error);
         // Execute the partial code
         LLOGI("%s",error.c_str());
         
@@ -124,18 +95,8 @@ void processChar(char c) {
 
 void setup()
 {
- Serial.begin(115200);
-  bootloader_random_enable();
-  esp_err_t r = nvs_flash_init();//28KB for both 4m and 8m
-  if (r == ESP_ERR_NVS_NO_FREE_PAGES || r == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-    //ESP_LOGI("no free pages or nvs version mismatch, erase...");
-    nvs_flash_erase();
-    r = nvs_flash_init();
-}
-  luat_heap_init();
-  esp_event_loop_create_default();
-
-  lua_start();
+ a.begin(115200);
+ 
   memset(luaCodeBuffer, 0, MAX_BUFFER_SIZE);
 }
 

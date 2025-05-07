@@ -20,13 +20,15 @@ extern "C"
 
 #include <time.h>
 #include <sys/time.h>
+extern lua_State *L;
 }
 
-class HyperlabLuaWrapers
+class luatosWrapper
 {
 public:
-    HyperlabLuaWrapers();
-    ~HyperlabLuaWrapers();
-    bool hyperlab_exec_string(lua_State* L, const char* lua_code, std::string& error_msg);
-    void hyperlab_lua_start();
+    luatosWrapper();
+    ~luatosWrapper();
+    void begin(int baudRate = 115200);
+    bool luatosWrapper_exec_string(lua_State* L, const char* lua_code, std::string& error_msg);
+    void luatosWrapper_lua_start();
 };

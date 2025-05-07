@@ -1,8 +1,14 @@
-#include "hyperlabLuaWrapers.h"
+#include "luatosWrapper.h"
 
 
-HyperlabLuaWrapers::HyperlabLuaWrapers()
+luatosWrapper::luatosWrapper()
 {
+    
+}
+
+void luatosWrapper::begin(int baudRate)
+{
+    Serial.begin(baudRate);
     bootloader_random_enable();
     esp_err_t r = nvs_flash_init();//28KB for both 4m and 8m
   if (r == ESP_ERR_NVS_NO_FREE_PAGES || r == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -14,10 +20,9 @@ HyperlabLuaWrapers::HyperlabLuaWrapers()
   luat_heap_init();
   esp_event_loop_create_default();
 
-  hyperlab_lua_start();
+  luatosWrapper_lua_start();
 }
-
-bool HyperlabLuaWrapers:: hyperlab_exec_string(lua_State* L, const char* lua_code, std::string& error_msg)
+bool luatosWrapper:: luatosWrapper_exec_string(lua_State* L, const char* lua_code, std::string& error_msg)
 {
     int result = luaL_dostring(L, lua_code);
     if (result != LUA_OK) {
@@ -30,14 +35,14 @@ bool HyperlabLuaWrapers:: hyperlab_exec_string(lua_State* L, const char* lua_cod
     return true;
 }
 
-void HyperlabLuaWrapers:: hyperlab_lua_start()
+void luatosWrapper:: luatosWrapper_lua_start()
 {
     luat_timer_stop_all();
     luat_main();
 }
 
 
-HyperlabLuaWrapers:: ~HyperlabLuaWrapers()
+luatosWrapper:: ~luatosWrapper()
 {
     
 }
