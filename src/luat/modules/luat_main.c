@@ -231,7 +231,7 @@ int luat_main (void) {
   // #endif
 
   // 1. 初始化文件系统
-  luat_fs_init();
+
 #ifdef LUAT_USE_OTA
   if (luat_ota_exec() == 0) {
     luat_os_reboot(5);

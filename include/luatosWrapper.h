@@ -17,7 +17,7 @@ extern "C"
 #include "esp_log.h"
 #include "esp_task_wdt.h"
 #include "luat_rtos.h"
-
+#include "luat_fs.h"
 #include <time.h>
 #include <sys/time.h>
 extern lua_State *L;

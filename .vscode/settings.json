@@ -10,6 +10,8 @@
         "luat_libs.h": "c",
         "initializer_list": "cpp",
         "xstring": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "customluabindings.h": "c",
+        "lua.h": "c"
     }
 }

@@ -1,5 +1,5 @@
 #include "luatosWrapper.h"
-
+#include "customLuaBindings.h"
 
 luatosWrapper::luatosWrapper()
 {
@@ -15,6 +15,7 @@ void luatosWrapper::begin(int baudRate)
     //ESP_LOGI("no free pages or nvs version mismatch, erase...");
     nvs_flash_erase();
     r = nvs_flash_init();
+    luat_fs_init();
    
 }
   luat_heap_init();
@@ -39,6 +40,8 @@ void luatosWrapper:: luatosWrapper_lua_start()
 {
     luat_timer_stop_all();
     luat_main();
+    regiterCustomLua();
+
 }
 
 
