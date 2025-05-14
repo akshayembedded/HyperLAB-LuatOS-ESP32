@@ -3,16 +3,6 @@
 
 #include "luatosWrapper.h"
 
-extern "C"
-{
-
-
-
-extern lua_State *L;
-#define LUAT_LOG_TAG "main"
-#include "luat_log.h"
-
-}
 #define MAX_BUFFER_SIZE 8192
 char luaCodeBuffer[MAX_BUFFER_SIZE];
 int bufferPos = 0;
@@ -39,7 +29,7 @@ void processChar(char c) {
         Serial.println("Executing code...");
         int result = a.luatosWrapper_exec_string(L, luaCodeBuffer,error);
         // Execute the partial code
-        LLOGI("%s",error.c_str());
+        Serial.printf("%s",error.c_str());
         
         if (result != 0) {
           Serial.println("Error executing Lua code!");
@@ -82,7 +72,7 @@ void processChar(char c) {
         luaCodeBuffer[bufferPos] = '\0';
         a.luatosWrapper_exec_string(L, luaCodeBuffer,error);
         // Execute the partial code
-        LLOGI("%s",error.c_str());
+        Serial.printf("%s",error.c_str());
         
         // Reset buffer
         memset(luaCodeBuffer, 0, MAX_BUFFER_SIZE);
