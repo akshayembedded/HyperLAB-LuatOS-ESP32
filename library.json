@@ -31,8 +31,7 @@
       "-DLUA_USE_ESP32S3",
       "-DUART_SCLK_DEFAULT=9600",
       "-DESP_LWIP_DHCP_FINE_TIMERS_ONDEMAND0", 
-      "-D__LUATOS__",    
-      "-DLUA_USE_ESP32S3"
+      "-D__LUATOS__"
       ]
     },
     "examples": [

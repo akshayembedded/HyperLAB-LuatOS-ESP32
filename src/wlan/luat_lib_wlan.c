@@ -16,7 +16,10 @@
 ]]
 
 */
-
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 #include "luat_base.h"
 #include "luat_wlan.h"
 #ifdef LUAT_USE_DRV_WLAN
@@ -686,3 +689,8 @@ LUAMOD_API int luaopen_wlan( lua_State *L ) {
     luat_newlib2(L, reg_wlan);
     return 1;
 }
+
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
